@@ -16,6 +16,11 @@
 		</li>
 		{{- end }}
 		{{- end }}
+		{{- $translations := .Site.Home.AllTranslations }}
+		{{- if gt (len $translations) 1 }}
+		<li class="menu__item menu__item--divider"><hr></li>
+		{{- partial "language_switcher.html" . }}
+		{{- end }}
 	</ul>
 </nav>
 {{ else -}}

@@ -1,10 +1,23 @@
-{{- if .IsTranslated }}
+{{- $currentPage := . }}
 <div class="meta__item-translations meta__item">
 	<span class="meta__text">
-		{{- T "meta_translations" }}: {{ range $index, $translation := .Translations }}
+		{{- T "meta_translations" }}:
+		{{- range $index, $lang := .Site.Languages }}
 			{{- if gt $index 0 }}, {{ end -}}
-			<a class="meta__link" href="{{ .RelPermalink }}">{{ .Lang | upper }}</a>
+			{{- if eq $lang.Lang $currentPage.Lang }}
+				<span class="meta__link--current">{{ $lang.Lang | upper }}</span>
+			{{- else }}
+				{{- $hasTranslation := false }}
+				{{- range $currentPage.Translations }}
+					{{- if eq .Lang $lang.Lang }}
+						{{- $hasTranslation = true }}
+						<a class="meta__link" href="{{ .RelPermalink }}">{{ $lang.Lang | upper }}</a>
+					{{- end }}
+				{{- end }}
+				{{- if not $hasTranslation }}
+					<span class="meta__link--disabled">{{ $lang.Lang | upper }}</span>
+				{{- end }}
+			{{- end }}
 		{{- end }}
 	</span>
 </div>
-{{- end }}

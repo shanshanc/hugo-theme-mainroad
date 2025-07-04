@@ -8,6 +8,9 @@
 - id: sidemenu_title
   translation: "選單"
 
+- id: posts_title
+  translation: "文章列表"
+
 # Post meta
 - id: meta_lastmod
   translation: "最後修改"

@@ -1,0 +1,12 @@
+{{- $translations := .Site.Home.AllTranslations }}
+{{- if gt (len $translations) 1 }}
+  {{- range $translations }}
+    {{- if ne $.Site.Language .Language }}
+    <li class="menu__item menu__item--lang">
+      <a class="menu__link" href="{{ .RelPermalink }}">
+        <span class="menu__text">{{ .Language.LanguageName }}</span>
+      </a>
+    </li>
+    {{- end }}
+  {{- end }}
+{{- end }}
